@@ -2,7 +2,9 @@
 title: "Practical ML peer assignment"
 author: "Suryadipta Das"
 date: "October 23, 2018"
-output: html_document
+output:
+  html_document: default
+  word_document: default
 ---
 
 
@@ -82,12 +84,12 @@ print(confusionmatrix_cv_tree)
 
 ## Training our model with random forest
 ```{r}
-random <- train(classe~., data = training, method = "rf")
+model_rf <- train(classe~., data = training, method = "rf")
 
-predict_training_rf <- predict(random, training)
+predict_training_rf <- predict(model_rf, training)
 confusionmatrix_training_rf <- confusionMatrix(predict_training_rf, training$classe)
 
-predict_crossvalidation_rf <- predict(random, crossvalidation)
+predict_crossvalidation_rf <- predict(model_rf, crossvalidation)
 confusionmatrix_cv_rf <- confusionMatrix(predict_crossvalidation_rf, crossvalidation$classe)
 
 print(confusionmatrix_cv_rf)
@@ -97,10 +99,10 @@ print(confusionmatrix_cv_rf)
 ## Conclusion:
 We see that the accuracy of the random forest model is more than that of PCA. Hence random forest is preferred for training this dataset.
 
-## Checking on the cross validation set
+## Checking on the testing set
 
 ```{r}
-predict_testing <- predict(random, testing)
+predict_testing <- predict(model_rf, testing)
 predict_testing
 
 ```
